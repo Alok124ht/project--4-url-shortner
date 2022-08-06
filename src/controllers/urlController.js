@@ -1,5 +1,6 @@
 const urlModel = require('../models/urlModel')
 const validator = require('../validation/validation')
+
 const shortId = require('shortid')
 const url = require("validator")
 const redis = require("redis");
@@ -8,7 +9,7 @@ const { promisify } = require("util");
 
 // Connect to Redis 
 
-const redisClient = redis.createClient(
+const redisClient = redis.createClient(////////////
     11946,                                                          // port no
     "redis-11946.c301.ap-south-1-1.ec2.cloud.redislabs.com",        //endpoint
     { no_ready_check: true }
@@ -36,7 +37,7 @@ const createUrl = async function (req, res) {
         if (!validator.isValidRequestBody(data)) {
             return res.status(400).send({ status: false, message: "Body is empty please provide data " })
         }
-        if (!data.longUrl || !validator.isValid(data.longUrl)) {
+        if (!data.longUrl || !validator.isValid(data.longUrl)) { ////////////
             return res.status(400).send({ status: false, message: "Not a valid URL format. Please provide long url." })
         }
 
@@ -84,7 +85,7 @@ const getUrl = async function (req, res) {
         const urlCode = req.params.urlCode      // Getting data from params
         
 
-        if (!shortId.isValid(urlCode)) {
+        if (!shortId.isValid(urlCode)) {///if url code length is zero in params
             return res.status(400).send({ status: false, message: "Url Code is not valid Code. Please provide correct input" })
         }
 
@@ -105,15 +106,7 @@ const getUrl = async function (req, res) {
     }
 }
 
-// const flushw = (req, res) => {
-//     redisClient.flushall("ASYNC", (err, savedData) => {
-//     if (err)
-//     console.log(err)
-//     else if (savedData)
-//     console.log("Memory flushed: ", savedData)
-//     })
-//     res.status(200).send({ msg: "redis memery cleared" })
-// }
+
 
 module.exports = { createUrl, getUrl }
 

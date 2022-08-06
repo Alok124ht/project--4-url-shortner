@@ -8,7 +8,7 @@ router.post('/url/shorten', urlController.createUrl)
 // ------------------------ GET /:urlCode -----------------------------
 router.get('/:urlCode', urlController.getUrl)
 
-//router.put("/url", urlController.flushw )
+
 
 module.exports = router
 
